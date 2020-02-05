@@ -16,7 +16,6 @@ class todosController extends Controller
     public function index()
     {
         $data = DB::table('Todolists')
-                ->where('completed', 0)
                 ->get();
         // dd($data);
 
@@ -90,6 +89,8 @@ class todosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('todolists')
+            ->where('TL_id', $id)
+            ->delete();
     }
 }

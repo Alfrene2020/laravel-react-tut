@@ -55591,21 +55591,62 @@ function (_Component) {
       });
     }
   }, {
+    key: "deleteTask",
+    value: function deleteTask(e) {
+      console.log(e.target.value);
+      e.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/delete/".concat(e.target.value)).then(function (response) {
+        alert("Deleted Successfully");
+      }).then(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "container table-auto"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "px-4 py-2"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "px-4 py-2"
+      }, "Todo's"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "px-4 py-2"
+      }, "Delete"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
         className: "text-center"
       }, this.state.todos.map(function (todo, index) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: index
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "border px-4 py-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "checkbox",
           value: todo.TL_id,
           onChange: _this3.markComplete
-        }), todo.Todos);
-      }));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "border px-4 py-2",
+          style: {
+            textDecoration: todo.Completed == 1 ? "line-through" : "none"
+          }
+        }, todo.Todos), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          className: "border px-4 py-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          value: todo.TL_id,
+          onClick: _this3.deleteTask,
+          type: "submit",
+          className: "bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full"
+        }, "Delete")));
+      })))) //    <div className = "text-center">
+      //        {this.state.todos.map((todo, index) => <p key={index}>
+      //            <input type="checkbox" value={todo.TL_id} onChange = {this.markComplete}/>
+      //            {todo.Todos}
+      //            </p>)}
+      //    </div>
+      ;
     }
   }]);
 
