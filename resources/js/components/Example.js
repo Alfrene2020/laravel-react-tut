@@ -5,14 +5,8 @@ export default class Example extends Component {
     render() {
         return (
             <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-md-8">
-                        <div className="card">
-                            <div className="card-header">aw Example Component</div>
-
-                            <div className="card-body">I'm an example component!</div>
-                        </div>
-                    </div>
+                <div className="text-center mt-20 font-light text-4xl">
+                    Hi Im a React Component
                 </div>
             </div>
         );

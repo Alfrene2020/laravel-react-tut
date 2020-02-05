@@ -1,20 +1,49 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 export default class Todos extends Component {
+    
+    constructor()
+    {
+        super();
+        this.state = 
+        {
+            todos: []
+        }
+    }
+
+    componentWillMount()
+    {
+        axios.get('/api/todolist').then(response => {
+            this.setState({
+                todos: response.data
+            });
+        }).catch(errors => {
+            console.log(errors);
+        })
+    }
+
+    markComplete(e) 
+  {
+        console.log(e.target.value);
+        e.preventDefault();
+
+        axios.post(`/api/edit/${e.target.value}`).then(response => {
+            alert("Updated Successfully");
+        }).then(error => {
+            console.log(error);
+        });
+  };
+    
     render() {
         return (
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-md-8">
-                        <div className="card">
-                            <div className="card-header">AWWWWWW Component</div>
-
-                            <div className="card-body">I'm an example component!</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <div className = "text-center">
+               {this.state.todos.map((todo, index) => <p key={index}>
+                   <input type="checkbox" value={todo.TL_id} onChange = {this.markComplete}/>
+                   {todo.Todos}
+                   </p>)}
+           </div>
         );
     }
 }

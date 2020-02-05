@@ -15,7 +15,9 @@ class todosController extends Controller
      */
     public function index()
     {
-        $data = DB::table('Todolists')->get();
+        $data = DB::table('Todolists')
+                ->where('completed', 0)
+                ->get();
         // dd($data);
 
         return response()->json($data);
@@ -39,7 +41,9 @@ class todosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $todo = $request->get('todo');
+        DB::table('Todolists')->insert(
+            ['Todos' => $todo]);
     }
 
     /**
@@ -61,7 +65,9 @@ class todosController extends Controller
      */
     public function edit($id)
     {
-        //
+        DB::table('todolists')
+            ->where('Tl_id', $id)
+            ->update(['Completed' => 1]);
     }
 
     /**
