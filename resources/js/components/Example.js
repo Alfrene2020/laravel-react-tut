@@ -6,7 +6,7 @@ export default class Example extends Component {
         return (
             <div className="container">
                 <div className="text-center mt-20 font-light text-4xl">
-                    Hi Im a React Component
+                   Simple Todo Web App
                 </div>
             </div>
         );

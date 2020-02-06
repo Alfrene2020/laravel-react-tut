@@ -55386,7 +55386,7 @@ function (_Component) {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-center mt-20 font-light text-4xl"
-      }, "Hi Im a React Component"));
+      }, "Simple Todo Web App"));
     }
   }]);
 
@@ -55537,9 +55537,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -55563,32 +55563,43 @@ function (_Component) {
     _this.state = {
       todos: []
     };
+    _this.deleteTask = _this.deleteTask.bind(_assertThisInitialized(_this));
+    _this.markComplete = _this.markComplete.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Todos, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      var _this2 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/todolist').then(function (response) {
-        _this2.setState({
-          todos: response.data
-        });
-      })["catch"](function (errors) {
-        console.log(errors);
-      });
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this._isMounted = true;
+      this.fetchData();
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this._isMounted = false;
     }
   }, {
     key: "markComplete",
     value: function markComplete(e) {
+      var _this2 = this;
+
       console.log(e.target.value);
-      e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/edit/".concat(e.target.value)).then(function (response) {
-        alert("Updated Successfully");
-      }).then(function (error) {
-        console.log(error);
-      });
+      var checkBox = document.getElementById("".concat(e.target.value));
+
+      if (checkBox.checked == true) {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/done/".concat(e.target.value)).then(function (response) {
+          console.log(response);
+        }).then(function () {
+          _this2.fetchData();
+        });
+      } else {
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/notdone/".concat(e.target.value)).then(function (response) {
+          console.log(response);
+        }).then(function () {
+          _this2.fetchData();
+        });
+      }
     }
   }, {
     key: "deleteTask",
@@ -55596,15 +55607,33 @@ function (_Component) {
       console.log(e.target.value);
       e.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/delete/".concat(e.target.value)).then(function (response) {
-        alert("Deleted Successfully");
+        alert("deleted Successfully");
       }).then(function (error) {
         console.log(error);
+      });
+      this.fetchData();
+    }
+  }, {
+    key: "fetchData",
+    value: function fetchData() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/todolist').then(function (response) {
+        if (_this3._isMounted) {
+          var todos = response.data;
+
+          _this3.setState({
+            todos: todos
+          });
+        }
+      })["catch"](function (errors) {
+        console.log(errors);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
@@ -55625,8 +55654,9 @@ function (_Component) {
           className: "border px-4 py-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "checkbox",
+          id: todo.TL_id,
           value: todo.TL_id,
-          onChange: _this3.markComplete
+          onChange: _this4.markComplete
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           className: "border px-4 py-2",
           style: {
@@ -55636,17 +55666,11 @@ function (_Component) {
           className: "border px-4 py-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           value: todo.TL_id,
-          onClick: _this3.deleteTask,
+          onClick: _this4.deleteTask,
           type: "submit",
           className: "bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full"
         }, "Delete")));
-      })))) //    <div className = "text-center">
-      //        {this.state.todos.map((todo, index) => <p key={index}>
-      //            <input type="checkbox" value={todo.TL_id} onChange = {this.markComplete}/>
-      //            {todo.Todos}
-      //            </p>)}
-      //    </div>
-      ;
+      }))));
     }
   }]);
 

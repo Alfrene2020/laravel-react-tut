@@ -7,46 +7,70 @@ export default class Todos extends Component {
     constructor()
     {
         super();
-        this.state = 
-        {
+        this.state = {
             todos: []
+        }
+        this.deleteTask = this.deleteTask.bind(this);
+        this.markComplete = this.markComplete.bind(this);
+    }
+    componentDidMount()
+    {
+        this._isMounted = true;
+        this.fetchData()
+        
+    }
+    componentWillUnmount()
+    {
+        this._isMounted = false;
+    }
+
+    markComplete(e) 
+    {
+        console.log(e.target.value);
+
+        var checkBox = document.getElementById(`${e.target.value}`);
+        if(checkBox.checked == true)
+        {
+            axios.post(`/api/done/${e.target.value}`).then(function(response){
+                console.log(response)
+             }).then(() => {
+                 this.fetchData()
+             })
+        } else{
+            axios.post(`/api/notdone/${e.target.value}`).then(function(response){
+                console.log(response)
+             }).then(() => {
+                 this.fetchData()
+             })
         }
     }
 
-    componentWillMount()
+    deleteTask(e)
+    {
+        console.log(e.target.value)
+        e.preventDefault()
+        axios.post(`/api/delete/${e.target.value}`).then(response => {
+            alert("deleted Successfully")
+        }).then(error => {
+            console.log(error);
+        })
+        
+        this.fetchData()
+    }
+
+    fetchData()
     {
         axios.get('/api/todolist').then(response => {
-            this.setState({
-                todos: response.data
-            });
+            if(this._isMounted){
+                const todos = response.data; 
+                this.setState({
+                    todos
+                });
+            }
         }).catch(errors => {
             console.log(errors);
         })
     }
-
-    markComplete(e) 
-  {
-        console.log(e.target.value);
-        e.preventDefault();
-
-        axios.post(`/api/edit/${e.target.value}`).then(response => {
-            alert("Updated Successfully");
-        }).then(error => {
-            console.log(error);
-        });
-  };
-
-    deleteTask(e)
-    {
-        console.log(e.target.value);
-        e.preventDefault();
-
-        axios.post(`/api/delete/${e.target.value}`).then(response => {
-            alert("Deleted Successfully");
-        }).then(error => {
-            console.log(error);
-        });
-    };
     
     render() {
         return (
@@ -62,7 +86,7 @@ export default class Todos extends Component {
                     <tbody className="text-center">
                         {this.state.todos.map((todo, index) =>
                         <tr key={index}>
-                            <td className="border px-4 py-2"><input type="checkbox" value={todo.TL_id} onChange = {this.markComplete}/></td>
+                            <td className="border px-4 py-2"><input type="checkbox" id={todo.TL_id} value={todo.TL_id} onChange = {this.markComplete}/></td>
                             <td className="border px-4 py-2" style= {{ textDecoration: todo.Completed == 1 ? "line-through" : "none" }}>
                                 {todo.Todos}
                             </td>
@@ -75,12 +99,6 @@ export default class Todos extends Component {
                     </tbody>
                 </table>
             </div>
-        //    <div className = "text-center">
-        //        {this.state.todos.map((todo, index) => <p key={index}>
-        //            <input type="checkbox" value={todo.TL_id} onChange = {this.markComplete}/>
-        //            {todo.Todos}
-        //            </p>)}
-        //    </div>
         );
     }
 }

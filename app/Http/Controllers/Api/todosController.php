@@ -62,11 +62,16 @@ class todosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function markDone($id)
     {
-        DB::table('todolists')
-            ->where('Tl_id', $id)
-            ->update(['Completed' => 1]);
+        return DB::table('todolists')->where('Tl_id', $id)->update(['Completed' => 1]);
+        
+    }
+
+    public function markNotdone($id)
+    {
+        return DB::table('todolists')->where('Tl_id', $id)->update(['Completed' => 0]);
+        
     }
 
     /**
@@ -89,7 +94,7 @@ class todosController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('todolists')
+        $todo = DB::table('todolists')
             ->where('TL_id', $id)
             ->delete();
     }

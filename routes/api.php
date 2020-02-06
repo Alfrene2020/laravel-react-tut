@@ -18,5 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('todolist', 'Api\todosController');
-Route::post('edit/{id}', 'Api\todosController@edit');
+Route::post('done/{id}', 'Api\todosController@markDone');
+Route::post('notdone/{id}', 'Api\todosController@markNotdone');
 Route::post('delete/{id}', 'Api\todosController@destroy');
