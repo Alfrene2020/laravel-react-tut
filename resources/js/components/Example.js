@@ -5,8 +5,8 @@ export default class Example extends Component {
     render() {
         return (
             <div className="container">
-                <div className="text-center mt-20 font-light text-4xl">
-                   Simple Todo Web App
+                <div className="text-center mt-40 font-light text-4xl">
+                   Simple Task Checklist Web App
                 </div>
             </div>
         );

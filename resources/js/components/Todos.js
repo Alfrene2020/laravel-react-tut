@@ -50,7 +50,7 @@ export default class Todos extends Component {
         console.log(e.target.value)
         e.preventDefault()
         axios.post(`/api/delete/${e.target.value}`).then(response => {
-            alert("deleted Successfully")
+            // alert("deleted Successfully")
         }).then(error => {
             console.log(error);
         })
@@ -75,12 +75,12 @@ export default class Todos extends Component {
     render() {
         return (
             <div className="container">
-                <table className="container table-auto">
+                <table className="mt-10 w-10/12 container table-auto">
                     <thead>
                         <tr>
-                        <th className="px-4 py-2"></th>
-                        <th className="px-4 py-2">Todo's</th>
-                        <th className="px-4 py-2">Delete</th>
+                        <th className="font-medium text-2xl px-4 py-2">Checklist</th>
+                        <th className="font-medium text-2xl px-4 py-2">Task's</th>
+                        <th className="font-medium text-2xl px-4 py-2">Delete</th>
                         </tr>
                     </thead>
                     <tbody className="text-center">

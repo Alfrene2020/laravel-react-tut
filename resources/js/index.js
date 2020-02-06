@@ -10,10 +10,10 @@ export default class Index extends Component {
         return (
             <div className="container content-start">
                 <Router>
-                    <div className="text-center pt-5 pb-4 -m-px font-serif font-bold text-xl">
-                        <Link className="pr-16 hover:text-blue-800" to="/">Home</Link>
-                        <Link className="pr-16 hover:text-blue-800" to="/Todos">Todos</Link>
-                        <Link className="pr-16 hover:text-blue-800" to="/NewTodos">Add</Link> 
+                    <div className="border-8 text-center pt-5 pb-4 -m-px font-serif font-bold text-xl">
+                        <Link className="mr-48 text-3xl hover:text-blue-800" to="/">Home</Link>
+                        <Link className="ml-48 mr-48 text-3xl hover:text-blue-800" to="/Todos">Tasks</Link>
+                        <Link className="ml-48 text-3xl hover:text-blue-800" to="/NewTodos">Add</Link> 
                         <hr/>
                     </div>
                     <div>

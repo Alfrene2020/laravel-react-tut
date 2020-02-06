@@ -55239,15 +55239,15 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container content-start"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "text-center pt-5 pb-4 -m-px font-serif font-bold text-xl"
+        className: "border-8 text-center pt-5 pb-4 -m-px font-serif font-bold text-xl"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        className: "pr-16 hover:text-blue-800",
+        className: "mr-48 text-3xl hover:text-blue-800",
         to: "/"
       }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        className: "pr-16 hover:text-blue-800",
+        className: "ml-48 mr-48 text-3xl hover:text-blue-800",
         to: "/Todos"
-      }, "Todos"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        className: "pr-16 hover:text-blue-800",
+      }, "Tasks"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "ml-48 text-3xl hover:text-blue-800",
         to: "/NewTodos"
       }, "Add"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/Todos",
@@ -55385,8 +55385,8 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "text-center mt-20 font-light text-4xl"
-      }, "Simple Todo Web App"));
+        className: "text-center mt-40 font-light text-4xl"
+      }, "Simple Task Checklist Web App"));
     }
   }]);
 
@@ -55485,14 +55485,14 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal",
+        className: "bg-blue-100 w-1/2 container mt-24 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal",
         type: "text",
         name: "todo",
-        placeholder: "Enter your new task/todo",
+        placeholder: "Enter your new task",
         onChange: this.handleChange.bind(this),
         value: this.state.name
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "w-1/12 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-5"
+        className: "container w-1/12 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mt-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-blue",
         type: "submit"
@@ -55606,8 +55606,7 @@ function (_Component) {
     value: function deleteTask(e) {
       console.log(e.target.value);
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/delete/".concat(e.target.value)).then(function (response) {
-        alert("deleted Successfully");
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/delete/".concat(e.target.value)).then(function (response) {// alert("deleted Successfully")
       }).then(function (error) {
         console.log(error);
       });
@@ -55638,13 +55637,13 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "container table-auto"
+        className: "mt-10 w-10/12 container table-auto"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        className: "px-4 py-2"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        className: "px-4 py-2"
-      }, "Todo's"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        className: "px-4 py-2"
+        className: "font-medium text-2xl px-4 py-2"
+      }, "Checklist"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "font-medium text-2xl px-4 py-2"
+      }, "Task's"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        className: "font-medium text-2xl px-4 py-2"
       }, "Delete"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
         className: "text-center"
       }, this.state.todos.map(function (todo, index) {
