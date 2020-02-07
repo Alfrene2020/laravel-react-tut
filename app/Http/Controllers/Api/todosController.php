@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
+use App\todo;
 
 class todosController extends Controller
 {
@@ -15,11 +15,8 @@ class todosController extends Controller
      */
     public function index()
     {
-        $data = DB::table('Todolists')
-                ->get();
-        // dd($data);
 
-        return response()->json($data);
+        return todo::all();
     }
 
     /**
@@ -40,9 +37,10 @@ class todosController extends Controller
      */
     public function store(Request $request)
     {
-        $todo = $request->get('todo');
-        DB::table('Todolists')->insert(
-            ['Todos' => $todo]);
+
+        $task = new todo;
+        $task->todos = $request->todo;
+        $task->save();
     }
 
     /**
@@ -64,13 +62,20 @@ class todosController extends Controller
      */
     public function markDone($id)
     {
-        return DB::table('todolists')->where('Tl_id', $id)->update(['Completed' => 1]);
+        $task = todo::find($id);
+        $task->completed = 1;
+        $task->save();
+        return $task;
         
     }
 
     public function markNotdone($id)
     {
-        return DB::table('todolists')->where('Tl_id', $id)->update(['Completed' => 0]);
+        $task = todo::find($id);
+        $task->completed = 0;
+        $task->save();
+        return $task;
+        // return DB::table('todolists')->where('Tl_id', $id)->update(['Completed' => 0]);
         
     }
 
@@ -94,8 +99,7 @@ class todosController extends Controller
      */
     public function destroy($id)
     {
-        $todo = DB::table('todolists')
-            ->where('TL_id', $id)
-            ->delete();
+        $task = todo::find($id);
+        $task->delete();
     }
 }

@@ -87,8 +87,8 @@ export default class Todos extends Component {
                         {this.state.todos.map((todo, index) =>
                         <tr key={index}>
                             <td className="border px-4 py-2"><input type="checkbox" id={todo.TL_id} value={todo.TL_id} onChange = {this.markComplete}/></td>
-                            <td className="border px-4 py-2" style= {{ textDecoration: todo.Completed == 1 ? "line-through" : "none" }}>
-                                {todo.Todos}
+                            <td className="border px-4 py-2" style= {{ textDecoration: todo.completed == 1 ? "line-through" : "none" }}>
+                                {todo.todos}
                             </td>
                             <td className="border px-4 py-2">
                                     <button value={todo.TL_id} onClick={this.deleteTask} type="submit" className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">

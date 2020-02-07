@@ -55469,6 +55469,8 @@ function (_Component) {
       event.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/todolist', this.state).then(function (response) {
         alert("Inserted Successfully");
+        var txtbx = document.getElementById('todo');
+        txtbx.value = "";
       }).then(function (error) {
         console.log(error);
       });
@@ -55488,6 +55490,7 @@ function (_Component) {
         className: "bg-blue-100 w-1/2 container mt-24 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal",
         type: "text",
         name: "todo",
+        id: "todo",
         placeholder: "Enter your new task",
         onChange: this.handleChange.bind(this),
         value: this.state.name
@@ -55659,9 +55662,9 @@ function (_Component) {
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           className: "border px-4 py-2",
           style: {
-            textDecoration: todo.Completed == 1 ? "line-through" : "none"
+            textDecoration: todo.completed == 1 ? "line-through" : "none"
           }
-        }, todo.Todos), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        }, todo.todos), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           className: "border px-4 py-2"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           value: todo.TL_id,

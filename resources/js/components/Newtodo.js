@@ -22,6 +22,8 @@ export default class Newtodo extends Component {
 
         axios.post('/api/todolist', this.state).then(response => {
             alert("Inserted Successfully");
+            var txtbx = document.getElementById('todo');
+            txtbx.value = "";
         }).then(error => {
             console.log(error);
         });
@@ -38,6 +40,7 @@ export default class Newtodo extends Component {
                             className = "bg-blue-100 w-1/2 container mt-24 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal"
                             type="text"
                             name="todo"
+                            id="todo"
                             placeholder="Enter your new task"
                             onChange={this.handleChange.bind(this)}
                             value={this.state.name}
