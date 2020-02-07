@@ -86,7 +86,9 @@ export default class Todos extends Component {
                     <tbody className="text-center">
                         {this.state.todos.map((todo, index) =>
                         <tr key={index}>
-                            <td className="border px-4 py-2"><input type="checkbox" id={todo.TL_id} value={todo.TL_id} onChange = {this.markComplete}/></td>
+                            <td className="border px-4 py-2">
+                                <input type="checkbox" id={todo.TL_id} value={todo.TL_id} onChange = {this.markComplete} checked = {todo.completed == 1 ? "checked" : "" }/>
+                            </td>
                             <td className="border px-4 py-2" style= {{ textDecoration: todo.completed == 1 ? "line-through" : "none" }}>
                                 {todo.todos}
                             </td>

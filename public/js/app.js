@@ -55658,7 +55658,8 @@ function (_Component) {
           type: "checkbox",
           id: todo.TL_id,
           value: todo.TL_id,
-          onChange: _this4.markComplete
+          onChange: _this4.markComplete,
+          checked: todo.completed == 1 ? "checked" : ""
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           className: "border px-4 py-2",
           style: {
